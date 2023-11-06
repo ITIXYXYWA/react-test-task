@@ -40,7 +40,6 @@ export const Routing = () => {
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
-      {/* в идеале нужно вынести header, content, footer в src/shared, но в тестовом можно оставить тут :)) */}
       <Header style={headerStyle}>
         <Button onClick={() => navigate("/")}>домой</Button>
         <Button onClick={() => navigate("/basket")}>корзина</Button>
