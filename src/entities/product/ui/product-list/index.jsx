@@ -1,16 +1,26 @@
 import React from 'react'
-import { getProducts } from '../../../../shared/api/product/api'
-import { useDispatch } from 'react-redux'
-import { productModel } from '../..'
 
-const ProductList = () => {
-	console.log(getProducts().then(value => console.log(value)))
+import { useNavigate } from 'react-router-dom'
 
-	useDispatch()(productModel.fetchProductList())
+import { Card } from 'antd'
+
+const ProductList = ({
+	product
+}) => {
+	const navigate = useNavigate()
+
+	const firstProductColor = product.colors[0]
 
 	
 	return (
-		<div>ProductList</div>
+		<Card
+			hoverable
+			style={{ width: 240 }}
+			cover={<img src={firstProductColor.images[0]} alt={firstProductColor.description}  />} 
+			onClick={() => navigate(`/${product.id}`)}
+		>
+			{ product.name }
+		</Card>
 	)
 }
 
