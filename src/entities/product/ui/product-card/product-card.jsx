@@ -4,11 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { Button, Flex, Typography } from "antd";
 import Sizes from "../../../size/ui/size";
 import { productModel } from "../..";
-import ColorSelect from "./ColorSelect";
-import ImageSlider from "./ImageSlider";
+import ImageSlider from "./image-slider";
 
 import styles from "./style.module.css";
 import { basketMethods, basketModel } from "../../../basket";
+import ColorSelect from "./color-select";
 
 const { Title, Text } = Typography;
 
