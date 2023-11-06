@@ -4,11 +4,7 @@ import { Routing } from "../pages";
 import { withProviders } from "./providers";
 
 const App = () => {
-  return (
-    <div>
-      <Routing />
-    </div>
-  );
+  return <Routing />;
 };
 
 export default withProviders(App);
