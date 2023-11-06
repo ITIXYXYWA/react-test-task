@@ -10,14 +10,14 @@ export const fetchProductList = createAsyncThunk('product/fetchAll', async () =>
 })
 
 export const fetchProductById = createAsyncThunk('product/byId', async (id) => {
-	const response = await productApi.getProduct(id)
+	const response = await productApi.getProduct(parseInt(id))
 	const data = await response
 
 	return data
 })
 
 export const fetchProductColorByColorId = createAsyncThunk('product/getColor', async (productId, colorId) => {
-	const response = await productApi.getProductColor(productId, colorId)
+	const response = await productApi.getProductColor(parseInt(productId), parseInt(colorId))
 	const data = await response
 
 	return data

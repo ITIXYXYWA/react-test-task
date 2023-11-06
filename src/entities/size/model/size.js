@@ -9,7 +9,7 @@ export const fetchAllSizes = createAsyncThunk('size/getAll', async () => {
 })
 
 export const fetchSizeById = createAsyncThunk('size/byId', async (id) => {
-	const response = await productApi.getSize(id)
+	const response = await productApi.getSize(parseInt(id))
 	const data = await response
 
 	return data
