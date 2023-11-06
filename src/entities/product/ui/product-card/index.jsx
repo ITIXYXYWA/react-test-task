@@ -1,42 +1,66 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-import { Button, Radio } from 'antd'
-import Sizes from '../../../size/ui/size'
-import { productModel } from '../..'
+import { Button, Flex, Typography } from "antd";
+import Sizes from "../../../size/ui/size";
+import { productModel } from "../..";
+import ColorSelect from "./ColorSelect";
+import ImageSlider from "./ImageSlider";
+
+import styles from "./style.module.css";
+
+const { Title, Text } = Typography;
 
 const ProductCard = ({ product }) => {
-	const navigate = useNavigate()
+  const navigate = useNavigate();
 
-	const [selectedColor, setSelectedColor] = useState(product?.colors?.[0]?.id)
+  const [selectedColorId, setSelectedColorId] = useState(
+    product?.colors?.[0]?.id,
+  );
+  const [selectedSizeId, setSelectedSizeId] = useState();
 
-	const optionsColor = product?.colors?.map(color => ({label: color.name, value: color.id}))
+  const { colorById, isSuccess } = productModel.useGetProductColorById({
+    productId: product?.id,
+    colorId: selectedColorId,
+  });
 
-	// console.log(optionsColor)
-	
-	const onChangeColorHandler = ({target: { value } }) => {
-		setSelectedColor(value)
-	}
-	
+  const addToBasketHandler = () => {};
 
-	const { colorById } = productModel.useGetProductColorById({productId: product.id, colorId: selectedColor})
+  return isSuccess ? (
+    <div>
+      <Flex justify="center" gap={10}>
+        <ImageSlider imgLinkList={colorById.images} />
 
-	console.log(colorById)
-	
-	return (
-		<div>
+        <div className={styles.product_info}>
+          <Title>{product.name}</Title>
 
-			<Sizes activeSizes={colorById?.sizes} />
+          <Text>{colorById.description}</Text>
 
-			<Radio.Group options={optionsColor} value={selectedColor} onChange={onChangeColorHandler} />
+          <Text style={{ fontSize: 20 }} strong>
+            {colorById.price} ₽
+          </Text>
 
-			<Button
-				onClick={() => navigate('/')}
-			>
-				Назад
-			</Button>
-		</div>
-	)
-}
+          <Sizes
+            activeSizes={colorById?.sizes}
+            selectedSize={selectedSizeId}
+            onSelectSize={setSelectedSizeId}
+          />
 
-export default ProductCard
+          <ColorSelect
+            product={product}
+            selectedColorId={selectedColorId}
+            setSelectedColorId={setSelectedColorId}
+          />
+
+          <Button onClick={addToBasketHandler}>Добавить</Button>
+        </div>
+      </Flex>
+
+      <Button onClick={() => navigate("/")}>Назад</Button>
+    </div>
+  ) : (
+    <>loading...</>
+  );
+};
+
+export default ProductCard;

@@ -1,2 +1,2 @@
-export * from './product'
-export * from './hooks'
+export * from "./product";
+export * from "./hooks";

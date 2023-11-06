@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
 
 /*
 {
@@ -9,29 +9,30 @@ import { createSlice } from '@reduxjs/toolkit'
 }
 */
 const initialState = {
-	basketList: [],
-}
+  basketList: [],
+};
 
 export const BasketSlice = createSlice({
-	name: 'basket',
-	initialState,
-	reducers: {
-		addToBasket: (state, action) => {
-			state.basketList.push({
-				id: state.basketList.length + 1,
-				...action.payload	
-			})
-		},
-		deleteProductById: (state, action) => {
-			state.basketList.splice(state.basketList.findIndex(el => el.id === action.payload), 1)
-		},
-	}
-})
+  name: "basket",
+  initialState,
+  reducers: {
+    addToBasket: (state, action) => {
+      state.basketList.push({
+        id: state.basketList.length + 1,
+        ...action.payload,
+      });
+    },
+    deleteProductById: (state, action) => {
+      state.basketList.splice(
+        state.basketList.findIndex((el) => el.id === action.payload),
+        1,
+      );
+    },
+  },
+});
 
+export const { addToBasket, deleteProductById } = BasketSlice.actions;
 
-export const { addToBasket, deleteProductById } = BasketSlice.actions
+export const getAllBasketProductsFx = (state) => state.basketList;
 
-
-export const getAllBasketProductsFx = (state) => state.basketList
-
-export default BasketSlice.reducer
+export default BasketSlice.reducer;

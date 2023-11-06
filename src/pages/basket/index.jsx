@@ -1,7 +1,5 @@
-import React from 'react'
+import React from "react";
 
 export const Basket = () => {
-	return (
-		<div>Basket</div>
-	)
-}
+  return <div>Basket</div>;
+};
