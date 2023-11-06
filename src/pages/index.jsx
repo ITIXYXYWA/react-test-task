@@ -4,7 +4,7 @@ import { Routes, Route } from 'react-router-dom'
 import { Layout, Button } from 'antd'
 
 import { ProductsList } from './products-list'
-import { ProductCard } from './product-card'
+import { ProductCardPage } from './product-card'
 import { Basket } from './basket'
 
 const { Content, Header, Footer } = Layout
@@ -42,7 +42,7 @@ export const Routing = () => {
 			<Content style={contentStyle} >
 				<Routes>
 					<Route path='/' element={<ProductsList />} />
-					<Route path='/:productId' element={<ProductCard />} />
+					<Route path='/:productId' element={<ProductCardPage />} />
 					<Route path='/basket' element={<Basket />} />
 				</Routes>
 			</Content>
