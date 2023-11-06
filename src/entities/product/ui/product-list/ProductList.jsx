@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import { Card } from "antd";
 
-const ProductList = ({ product }) => {
+export const ProductList = ({ product }) => {
   const navigate = useNavigate();
 
   const firstProductColor = product.colors[0];
@@ -25,5 +25,3 @@ const ProductList = ({ product }) => {
     </Card>
   );
 };
-
-export default ProductList;

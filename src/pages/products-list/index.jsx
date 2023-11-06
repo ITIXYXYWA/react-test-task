@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import ProductList from "../../entities/product/ui/product-list";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProductList, selectProducts } from "../../entities/product/model";
 
 import { Flex } from "antd";
+import { ProductList } from "../../entities/product";
 
 export const ProductsList = () => {
   const dispatch = useDispatch();
