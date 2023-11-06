@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Button, Flex, Typography } from "antd";
@@ -8,11 +8,15 @@ import ColorSelect from "./ColorSelect";
 import ImageSlider from "./ImageSlider";
 
 import styles from "./style.module.css";
+import { basketMethods, basketModel } from "../../../basket";
 
 const { Title, Text } = Typography;
 
 const ProductCard = ({ product }) => {
   const navigate = useNavigate();
+
+  const { addProductToBusket, minifiedProductIdListFromBasket } =
+    basketModel.useAddProductToBasket();
 
   const [selectedColorId, setSelectedColorId] = useState(
     product?.colors?.[0]?.id,
@@ -24,7 +28,33 @@ const ProductCard = ({ product }) => {
     colorId: selectedColorId,
   });
 
-  const addToBasketHandler = () => {};
+  const dinamicProductObject = {
+    productId: product.id,
+    colorId: selectedColorId,
+    sizeId: selectedSizeId,
+  };
+
+  const minifiedProduct =
+    basketMethods.minifyProductIdToString(dinamicProductObject);
+
+  const isProductHasOnBasket =
+    !!minifiedProductIdListFromBasket[minifiedProduct];
+
+  const addToBasketHandler = () => {
+    if (product.id && selectedColorId && selectedSizeId) {
+      addProductToBusket({
+        productId: product.id,
+        colorId: selectedColorId,
+        sizeId: selectedSizeId,
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (colorById?.sizes?.length) {
+      setSelectedSizeId(colorById.sizes[0]);
+    }
+  }, [colorById]);
 
   return isSuccess ? (
     <div>
@@ -52,7 +82,18 @@ const ProductCard = ({ product }) => {
             setSelectedColorId={setSelectedColorId}
           />
 
-          <Button onClick={addToBasketHandler}>Добавить</Button>
+          {isProductHasOnBasket ? (
+            <Button onClick={() => navigate("/basket")}>
+              Перейти в корзину
+            </Button>
+          ) : (
+            <Button
+              disabled={!colorById?.sizes?.length}
+              onClick={addToBasketHandler}
+            >
+              Добавить
+            </Button>
+          )}
         </div>
       </Flex>
 
@@ -63,4 +104,4 @@ const ProductCard = ({ product }) => {
   );
 };
 
-export default ProductCard;
+export { ProductCard };

@@ -16,8 +16,8 @@ const ImageSlider = ({ imgLinkList }) => {
   return (
     <div className={styles.image_slider_container}>
       <Flex vertical>
-        {imgLinkList.map((imgLink) => (
-          <div className={styles.image_slider_mini_img}>
+        {imgLinkList.map((imgLink, index) => (
+          <div key={index} className={styles.image_slider_mini_img}>
             <img
               onClick={() => setActiveImage(imgLink)}
               src={imgLink}

@@ -33,6 +33,6 @@ export const BasketSlice = createSlice({
 
 export const { addToBasket, deleteProductById } = BasketSlice.actions;
 
-export const getAllBasketProductsFx = (state) => state.basketList;
+export const selectProductListFromBasket = (state) => state.basket.basketList;
 
 export default BasketSlice.reducer;
