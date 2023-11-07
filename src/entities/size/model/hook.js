@@ -1,5 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllSizes, selectAllSizes } from "./size";
+import {
+  fetchAllSizes,
+  fetchSizeById,
+  selectAllSizes,
+  selectSizeById,
+} from "./size";
 import { useEffect } from "react";
 
 export const useGetSizes = () => {
@@ -13,5 +18,21 @@ export const useGetSizes = () => {
 
   return {
     sizesList,
+  };
+};
+
+export const useGetSizeById = (sizeId) => {
+  const dispatch = useDispatch();
+
+  const sizeById = useSelector((state) => selectSizeById(state, sizeId));
+
+  useEffect(() => {
+    if (sizeId) {
+      dispatch(fetchSizeById(sizeId));
+    }
+  }, [dispatch, sizeId]);
+
+  return {
+    sizeById,
   };
 };

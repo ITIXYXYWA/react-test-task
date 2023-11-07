@@ -27,7 +27,7 @@ export const SizeSlice = createSlice({
     });
 
     builder.addCase(fetchSizeById.fulfilled, (state, action) => {
-      state.byId[action.meta.arg.id] = action.payload;
+      state.byId[action.meta.arg] = action.payload;
     });
   },
 });
