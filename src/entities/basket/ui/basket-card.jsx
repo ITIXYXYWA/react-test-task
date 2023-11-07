@@ -26,7 +26,7 @@ export const BasketCard = ({ basketProduct }) => {
       cover={<img alt={colorById?.description} src={colorById?.images?.[0]} />}
     >
       <Space direction="vertical" gap={10}>
-        <Title>{productById?.name}</Title>
+        <Title level={3}>{productById?.name}</Title>
 
         <Text>Цвет: {colorById?.name}</Text>
 
