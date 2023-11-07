@@ -4,18 +4,19 @@ import { basketMethods, basketModel } from "..";
 export const useGetAllProductsFromBasket = () => {
   const basketList = useSelector(basketModel.selectProductListFromBasket);
 
+  const basketProductLength = basketList?.length
+
   return {
     basketList,
+    basketProductLength,
   };
 };
 
 export const useAddProductToBasket = () => {
   const dispatch = useDispatch();
-  const productsFromBasket = useSelector(
-    basketModel.selectProductListFromBasket,
-  );
+  const { basketList } = useGetAllProductsFromBasket()
 
-  const minifiedProductIdListFromBasket = productsFromBasket.reduce(
+  const minifiedProductIdListFromBasket = basketList.reduce(
     (acc, curr) => {
       const compressedProductId = basketMethods.minifyProductIdToString(curr);
 
